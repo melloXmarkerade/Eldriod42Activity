@@ -1,0 +1,68 @@
+{
+  "project_info": {
+    "project_number": "46173161085",
+    "project_id": "eldriodactivity",
+    "storage_bucket": "eldriodactivity.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:46173161085:android:c14042c0238fc88bef1314",
+        "android_client_info": {
+          "package_name": "com.example.activity"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "46173161085-bpv354gmv12sf63pnea56ui0qiqlhcn4.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyANVGbvT0njs74ENbdv6h9PD5oS-VxwKnc"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "46173161085-bpv354gmv12sf63pnea56ui0qiqlhcn4.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:46173161085:android:bb5c52af1e25afc4ef1314",
+        "android_client_info": {
+          "package_name": "com.example.myapplication"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "46173161085-bpv354gmv12sf63pnea56ui0qiqlhcn4.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyANVGbvT0njs74ENbdv6h9PD5oS-VxwKnc"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "46173161085-bpv354gmv12sf63pnea56ui0qiqlhcn4.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
