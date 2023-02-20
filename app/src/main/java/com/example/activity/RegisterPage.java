@@ -15,6 +15,7 @@ public class RegisterPage extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_register_page);
 
+        RecordBut = findViewById(R.id.RecordBut);
         LoginPage = findViewById(R.id.LoginPage);
 
         LoginPage.setOnClickListener(new View.OnClickListener() {
