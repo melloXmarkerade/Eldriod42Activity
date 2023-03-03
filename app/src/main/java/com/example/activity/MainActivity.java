@@ -1,15 +1,30 @@
 package com.example.activity;
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
+import android.widget.EditText;
+import android.widget.TextView;
+import android.widget.Toast;
+
+import com.google.android.gms.tasks.OnFailureListener;
+import com.google.android.gms.tasks.OnSuccessListener;
+import com.google.firebase.firestore.DocumentSnapshot;
+import com.google.firebase.firestore.FirebaseFirestore;
+import com.google.firebase.firestore.auth.User;
 
 public class MainActivity extends AppCompatActivity {
 
     Button Login, Registration;
+    FirebaseFirestore db;
+    TextView Username;
+    EditText password;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -17,6 +32,21 @@ public class MainActivity extends AppCompatActivity {
 
         Login = findViewById(R.id.Login_But);
         Registration = findViewById(R.id.RegisterPage);
+        db = FirebaseFirestore.getInstance();
+        Username = findViewById(R.id.Username);
+        password = findViewById(R.id.Password);
+
+        Login.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                String usersearch = Username.getText().toString();
+
+                if(!usersearch.isEmpty())
+                {
+                    SearchUser(usersearch);
+                }
+            }
+        });
 
         Registration.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -25,5 +55,34 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
+    }
+    public void SearchUser(String Username)
+    {
+
+        db.collection("UserAccount")
+                .document(Username)
+                .get()
+                .addOnSuccessListener(new OnSuccessListener<DocumentSnapshot>() {
+                    @Override
+                    public void onSuccess(DocumentSnapshot documentSnapshot) {
+                        String queriedPassword = documentSnapshot.getString("password");
+                        Log.d("Firestore", "Data read from Firestore: " + documentSnapshot.getData());
+
+                        if(queriedPassword == null)
+                        {
+                            Toast.makeText(MainActivity.this,"User does not exist", Toast.LENGTH_SHORT).show();
+                        }
+                        else {
+                            password.setText(queriedPassword);
+                            Toast.makeText(MainActivity.this,"User does exist", Toast.LENGTH_SHORT).show();
+                        }
+                    }
+                })
+                .addOnFailureListener(new OnFailureListener() {
+                    @Override
+                    public void onFailure(@NonNull Exception e) {
+                        Log.d("Firestore", "Error reading data from Firestore: " + e.getMessage());
+                    }
+                });
     }
 }

@@ -63,8 +63,8 @@ public class RegisterPage extends AppCompatActivity {
     {
         // Create a new user with a first and last name
         Map<String, Object> user = new HashMap<>();
-        user.put(" ", UsernameIn);
-        user.put(" ", PasswordIn);
+        user.put("username", UsernameIn);
+        user.put("password", PasswordIn);
 
         // Add a new document with a generated ID
         db.collection("UserAccount").document(UsernameIn)
