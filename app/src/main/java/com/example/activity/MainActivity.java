@@ -5,6 +5,7 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.os.Handler;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
@@ -24,6 +25,9 @@ public class MainActivity extends AppCompatActivity {
     FirebaseFirestore db;
     TextView Username;
     EditText password;
+    private volatile boolean stopThreadFlag = false;
+
+    private Handler mainHandler = new Handler();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -44,6 +48,8 @@ public class MainActivity extends AppCompatActivity {
                 if(!usersearch.isEmpty())
                 {
                     SearchUser(usersearch);
+                    startThread(2);
+                    startActivity(new Intent(MainActivity.this,HomePage.class));
                 }
             }
         });
@@ -55,6 +61,42 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
+    }
+    public void startThread(int seconds)
+    {
+        for(int i=0; i< seconds; i++)
+        {
+            Log.d("Thread Activity On going", "Start Thread : " + i);
+            try
+            {
+                Thread.sleep(1000);
+            } catch (InterruptedException e)
+            {
+                e.printStackTrace();
+            }
+        }
+        GraduationThread thread = new GraduationThread(10);
+    }
+    class GraduationThread extends Thread
+    {
+        int seconds;
+        GraduationThread(int seconds)
+        {
+            this.seconds = seconds;
+        }
+        @Override
+        public void run(){
+            for(int i=0; i< seconds; i++)
+            {
+                Log.d("THREAD ACTIVITY", "Start Thread: " + i);
+                try {
+                    Thread.sleep(1000);
+                } catch (InterruptedException e)
+                {
+                    e.printStackTrace();
+                }
+            }
+        }
     }
     public void SearchUser(String Username)
     {

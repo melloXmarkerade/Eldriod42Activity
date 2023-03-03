@@ -7,6 +7,7 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.os.Handler;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
@@ -25,6 +26,10 @@ public class RegisterPage extends AppCompatActivity {
     Button RecordBut, LoginPage;
     FirebaseFirestore db;
     TextView UsernameIn, PasswordIn;
+
+    private volatile boolean stopThreadFlag = false;
+
+    private Handler mainHandler = new Handler();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -53,11 +58,49 @@ public class RegisterPage extends AppCompatActivity {
 
                 if (!Username.isEmpty() && !Pass.isEmpty()) {
                     AddUser(Username, Pass);
+                    startThread(4);
+                    startActivity(new Intent(RegisterPage.this,MainActivity.class));
                 } else {
                     Toast.makeText(RegisterPage.this, "Please Double Check the creditial", Toast.LENGTH_SHORT).show();
                 }
             }
         });
+    }
+    public void startThread(int seconds)
+    {
+        for(int i=0; i< seconds; i++)
+        {
+            Log.d("Thread Activity On going", "Start Thread : " + i);
+            try
+            {
+                Thread.sleep(1000);
+            } catch (InterruptedException e)
+            {
+                e.printStackTrace();
+            }
+        }
+        RegisterPage.GraduationThread thread = new RegisterPage.GraduationThread(10);
+    }
+    class GraduationThread extends Thread
+    {
+        int seconds;
+        GraduationThread(int seconds)
+        {
+            this.seconds = seconds;
+        }
+        @Override
+        public void run(){
+            for(int i=0; i< seconds; i++)
+            {
+                Log.d("THREAD ACTIVITY", "Start Thread: " + i);
+                try {
+                    Thread.sleep(1000);
+                } catch (InterruptedException e)
+                {
+                    e.printStackTrace();
+                }
+            }
+        }
     }
     public void AddUser(String UsernameIn, String PasswordIn)
     {
