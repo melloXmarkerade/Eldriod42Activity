@@ -58,8 +58,7 @@ public class RegisterPage extends AppCompatActivity {
 
                 if (!Username.isEmpty() && !Pass.isEmpty()) {
                     AddUser(Username, Pass);
-                    startThread(4);
-                    startActivity(new Intent(RegisterPage.this,MainActivity.class));
+
                 } else {
                     Toast.makeText(RegisterPage.this, "Please Double Check the creditial", Toast.LENGTH_SHORT).show();
                 }
@@ -70,7 +69,7 @@ public class RegisterPage extends AppCompatActivity {
     {
         for(int i=0; i< seconds; i++)
         {
-            Log.d("Thread Activity On going", "Start Thread : " + i);
+            Log.d("Thread Activity", "Start Thread : " + i);
             try
             {
                 Thread.sleep(1000);
@@ -116,7 +115,10 @@ public class RegisterPage extends AppCompatActivity {
                     @Override
                     public void onSuccess(Void unused) {
                         Log.d(TAG, "DocumentSnapshot added with ID: " + UsernameIn);
+                        startThread(4);
                         Toast.makeText(RegisterPage.this,"Successfully Added " + UsernameIn, Toast.LENGTH_SHORT).show();
+                        startActivity(new Intent(RegisterPage.this,MainActivity.class));
+
                     }
                 })
                 .addOnFailureListener(new OnFailureListener() {

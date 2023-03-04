@@ -49,7 +49,7 @@ public class MainActivity extends AppCompatActivity {
                 {
                     SearchUser(usersearch);
                     startThread(2);
-                    startActivity(new Intent(MainActivity.this,HomePage.class));
+
                 }
             }
         });
@@ -66,7 +66,7 @@ public class MainActivity extends AppCompatActivity {
     {
         for(int i=0; i< seconds; i++)
         {
-            Log.d("Thread Activity On going", "Start Thread : " + i);
+            Log.d("Thread Activity", "Start Thread : " + i);
             try
             {
                 Thread.sleep(1000);
@@ -117,6 +117,7 @@ public class MainActivity extends AppCompatActivity {
                         else {
                             password.setText(queriedPassword);
                             Toast.makeText(MainActivity.this,"User does exist", Toast.LENGTH_SHORT).show();
+                            startActivity(new Intent(MainActivity.this,HomePage.class));
                         }
                     }
                 })
